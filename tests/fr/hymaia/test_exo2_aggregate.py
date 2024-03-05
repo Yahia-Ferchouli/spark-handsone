@@ -59,6 +59,8 @@ class SparkJobTests(unittest.TestCase):
 
         df_expected = self.create_expected_df(expected_data)
 
+        self.assertEqual(df_result.schema(), df_expected.schema())
+
         self.assertEqual(df_result.collect(), df_expected.collect())
 
 
@@ -78,6 +80,8 @@ class SparkJobTests(unittest.TestCase):
             Row(departement="75", nb_people=2)
         ]
         df_expected = self.create_expected_df(expected_data)
+
+        self.assertEqual(df_result.schema(), df_expected.schema())
 
         self.assertEqual(df_result.collect(), df_expected.collect())
 
@@ -109,6 +113,8 @@ class SparkJobTests(unittest.TestCase):
         ]
 
         df_expected = self.create_expected_df(expected_data)
+
+        self.assertEqual(df_result.schema(), df_expected.schema())
 
         self.assertEqual(df_result.collect(), df_expected.collect())
 

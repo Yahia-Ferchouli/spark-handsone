@@ -22,6 +22,8 @@ class TestMain(unittest.TestCase):
 
         actual = wordcount(input, "text")
 
+        self.assertEqual(actual.schema(), expected.schema())
+
         self.assertCountEqual(actual.collect(), expected.collect())
 
     # Test avec des entrées vides et NULL pour voir comment elles sont gérées
@@ -44,6 +46,8 @@ class TestMain(unittest.TestCase):
 
         actual_df = wordcount(input_df, "text")
 
+        self.assertEqual(actual_df.schema(), expected_df.schema())
+
         self.assertCountEqual(actual_df.collect(), expected_df.collect())
 
     # Vérification de l'insensibilité à la casse de la fonction 'wordcount'
@@ -55,6 +59,8 @@ class TestMain(unittest.TestCase):
         expected_df = spark.createDataFrame(expected_data)
 
         actual_df = wordcount(input_df, "text")
+
+        self.assertEqual(actual_df.schema(), expected_df.schema())
 
         self.assertCountEqual(actual_df.collect(), expected_df.collect())
 
@@ -74,6 +80,8 @@ class TestMain(unittest.TestCase):
         expected_df = spark.createDataFrame(expected_data)
 
         actual_df = wordcount(input_df, "text")
+
+        self.assertEqual(actual_df.schema(), expected_df.schema())
         self.assertCountEqual(actual_df.collect(), expected_df.collect())
 
     # Test pour voir comment la ponctuation est gérée
@@ -89,6 +97,7 @@ class TestMain(unittest.TestCase):
         expected_df = spark.createDataFrame(expected_data)
 
         actual_df = wordcount(input_df, "text")
+        self.assertEqual(actual_df.schema(), expected_df.schema())
         self.assertCountEqual(actual_df.collect(), expected_df.collect())
 
     def test_wordcount_with_accent(self):
@@ -102,6 +111,7 @@ class TestMain(unittest.TestCase):
         expected_df = spark.createDataFrame(expected_data)
 
         actual_df = wordcount(input_df, "text")
+        self.assertEqual(actual_df.schema(), expected_df.schema())
         self.assertCountEqual(actual_df.collect(), expected_df.collect())
 
     # Test du comptage des mots sur plusieurs lignes
@@ -123,6 +133,7 @@ class TestMain(unittest.TestCase):
 
         actual_df = wordcount(input_df, "text")
 
+        self.assertEqual(actual_df.schema(), expected_df.schema())
         self.assertCountEqual(actual_df.collect(), expected_df.collect())
 
 

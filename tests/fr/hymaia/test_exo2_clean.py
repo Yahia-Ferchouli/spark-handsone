@@ -17,6 +17,8 @@ class CreateDepartementTestCase(unittest.TestCase):
         expected_data = [Row(ziip="20190", departement="2A")]
         expected_df = spark.createDataFrame(expected_data)
 
+        self.assertEqual(result.schema(), expected_df.schema())
+
         # Vérification que le résultat correspond aux attentes
         self.assertEqual(result.collect(), expected_df.collect())
 
@@ -29,6 +31,7 @@ class CreateDepartementTestCase(unittest.TestCase):
         expected_data = [Row(zip="20200", departement="2B")]
         expected_df = spark.createDataFrame(expected_data)
 
+        self.assertEqual(result.schema(), expected_df.schema())
         self.assertEqual(result.collect(), expected_df.collect())
 
     # Test pour des codes postaux standards, vérifiant que la fonction extrait correctement les deux premiers chiffres
@@ -40,6 +43,7 @@ class CreateDepartementTestCase(unittest.TestCase):
         expected_data = [Row(zip="05001", departement="05")]
         expected_df = spark.createDataFrame(expected_data)
 
+        self.assertEqual(result.schema(), expected_df.schema())
         self.assertEqual(result.collect(), expected_df.collect())
 
     # Test pour les cas limites des codes postaux à la frontière entre '2A' et '2B'
@@ -52,6 +56,7 @@ class CreateDepartementTestCase(unittest.TestCase):
                          Row(zip="20200", departement="2B")]
         expected_df = spark.createDataFrame(expected_data)
 
+        self.assertEqual(result.schema(), expected_df.schema())
         self.assertEqual(result.collect(), expected_df.collect())
 
     # Test pour s'assurer que la fonction gère correctement les valeurs NULL dans le code postal
@@ -68,6 +73,7 @@ class CreateDepartementTestCase(unittest.TestCase):
         expected_data = [Row(zip=None, departement=None)]
         expected_df = spark.createDataFrame(expected_data, schema)
 
+        self.assertEqual(result.schema(), expected_df.schema())
         self.assertEqual(result.collect(), expected_df.collect())
 
     # Test pour vérifier le comportement de la fonction avec des codes postaux non standards
@@ -87,6 +93,7 @@ class CreateDepartementTestCase(unittest.TestCase):
                              StructField("departement", StringType(), True)])
         expected_df = spark.createDataFrame(expected_data, schema=schema)
 
+        self.assertEqual(result.schema(), expected_df.schema())
         self.assertEqual(result.collect(), expected_df.collect())
 
 
