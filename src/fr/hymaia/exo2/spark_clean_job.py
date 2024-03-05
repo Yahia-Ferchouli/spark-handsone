@@ -18,16 +18,12 @@ def create_departement(df):
                                .otherwise(col("zip").substr(1, 2)))
                          .otherwise(None))  # Code postal non valide
 
-def main():
-    spark = SparkSession.builder.appName("exo2").master(
-        "local[*]").getOrCreate()
+def main(param1, param2, param3, spark):
 
     df_client = spark.read.option("header", True).csv(
-        "/Users/yahiaferchouli/Documents/4IABD2/core-spark/spark-handson/src"
-        "/resources/exo2/clients_bdd.csv")
+        param1)
     df_city = spark.read.option("header", True).csv(
-        "/Users/yahiaferchouli/Documents/4IABD2/core-spark/spark-handson/src"
-        "/resources/exo2/city_zipcode.csv")
+        param2)
 
     df_client = df_client.filter("age >= 18")
 
@@ -39,9 +35,5 @@ def main():
 
 
     df_joined.write.mode("overwrite").parquet(
-        "/Users/yahiaferchouli/Documents/4IABD2/core-spark/spark-handson"
-        "/data/exo2/clean")
+        param3)
 
-
-if __name__ == "__main__":
-    main()

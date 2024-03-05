@@ -26,10 +26,15 @@ def main():
 
     df_sell_new_column = df_sell_udf_scala.withColumn("category_name", addCategoryName(col("category"), sc))
 
-    start_time = time()
-    df_sell_new_column.write.csv("result_scala_udf.csv", header=True, mode="overwrite")
+    '''start_time = time()
+    df_sell_new_column.write.csv("result_scala_udf.csv", header=True)
     end_time = time()
-    print("Temp execution scala_udf write", end_time-start_time)
+    print("Temp execution scala_udf write", end_time-start_time)'''
+
+    start_time = time()
+    df_sell_new_column.show()
+    end_time = time()
+    print("Temp execution scala_udf show", end_time - start_time)
 
 
 if __name__ == "__main__":
